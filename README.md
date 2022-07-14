@@ -1,6 +1,6 @@
 # HostPortSocket-matlab
 
-MATLAB binding of the HostPortSocker class for communication from and to the microcontroller over socket.
+MATLAB binding of the HostPortSocket class for communication from and to the microcontroller over socket.
 
 This is the (MATLAB) host-side implementation of the HostPort class using socket communication instead of USB-Serial. The class is internally implemented in C++ and interfaced to MATLAB using a mex file (generated from C/C++ code). The MATLAB class is thus just a wrapper around a C++ class.
 
