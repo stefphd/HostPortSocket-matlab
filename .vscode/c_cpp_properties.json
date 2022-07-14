@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "SBBMicro",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src"
+            ]
+        }
+    ],
+    "version": 4
+}
