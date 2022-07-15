@@ -1,8 +1,8 @@
 clear
 clc
 
-h = HostPortSocket();
-h.begin('192.168.0.1',9876,HostPortSocket.HEADER,HostPortSocket.TERMINATOR,HostPortSocket.TIMEOUT);
+h = HostPortTCP();
+h.begin('192.168.0.1',9876,HostPortTCP.HEADER,HostPortTCP.TERMINATOR,HostPortTCP.TIMEOUT);
 len = 32;
 type = 'single';
 

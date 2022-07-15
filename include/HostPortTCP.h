@@ -1,14 +1,14 @@
 
-#ifndef HOSTPORTSOCKET_H
-#define HOSTPORTSOCKET_H
+#ifndef HOSTPORTTCP_H
+#define HOSTPORTTCP_H
 
 #include <memory> 
 #include <string>
 #include "sockpp/tcp_connector.h"
 #include "sockpp/version.h"
 
-/*! \brief A class for host communication via socket port.
-    \details Class for host communication via socket port with a specified communication protocol.
+/*! \brief A class for host communication via TCP/IP protocol.
+    \details Class for host communication via TCP/IP protocol port with a specified communication protocol.
     Data packet consists of
     - 4-bytes header
     - data (with specified length)
@@ -17,18 +17,18 @@
     \author Stefano Lovato
     \date 2022
 */
-class HostPortSocket {
+class HostPortTCP {
 public:
 
     /*! \brief Constructor.
 		\details Default constructor. 
 	*/
-    HostPortSocket();
+    HostPortTCP();
 
     /*! \brief Desctructor.
 		\details Default destructor. It automatically destroy the serial object.
 	*/
-    ~HostPortSocket();
+    ~HostPortTCP();
 
     /*! \brief Begin the host port.
 		\details Function to begin the host port communication with default header, terminator, and timeout.

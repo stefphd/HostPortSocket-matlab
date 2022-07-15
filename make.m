@@ -1,8 +1,8 @@
 function make()
 
-    target = 'HostPortSocketMex';
+    target = 'HostPortTCPMex';
     include = './include';
-    src = 'src/HostPortSocketMex.cpp src/HostPortSocket.cpp src/sockpp/acceptor.cpp src/sockpp/connector.cpp src/sockpp/datagram_socket.cpp src/sockpp/exception.cpp src/sockpp/inet6_address.cpp src/sockpp/inet_address.cpp src/sockpp/socket.cpp src/sockpp/stream_socket.cpp';
+    src = 'src/HostPortTCPMex.cpp src/HostPortTCP.cpp src/sockpp/acceptor.cpp src/sockpp/connector.cpp src/sockpp/datagram_socket.cpp src/sockpp/exception.cpp src/sockpp/inet6_address.cpp src/sockpp/inet_address.cpp src/sockpp/socket.cpp src/sockpp/stream_socket.cpp';
     flags = '-lws2_32 ';
 
     if ispc

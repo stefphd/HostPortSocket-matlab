@@ -8,8 +8,8 @@
 #include <cstring>
 #include <memory> 
 
-//include HostPortSocket class
-#include "HostPortSocket.h"
+//include HostPortTCP class
+#include "HostPortTCP.h"
 
 //define
 #define getUint64 (uint64_t*) mxGetData
@@ -89,7 +89,7 @@ std::map<std::string, mxClassID> typeSizeMap = {
 };
 
 //Map handle to pointer
-std::map<uint64_t, std::shared_ptr<HostPortSocket>> handleMap;
+std::map<uint64_t, std::shared_ptr<HostPortTCP>> handleMap;
 
 //exit fnc
 int mexAtExit(void (*ExitFcn)(void)) {
@@ -123,7 +123,7 @@ void mexFunction(int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[]) {
 
         case Action::New: {
             plhs[0] = mxCreateNumericMatrix(1,1,mxUINT64_CLASS,mxREAL);
-            std::shared_ptr<HostPortSocket> handle(new HostPortSocket());
+            std::shared_ptr<HostPortTCP> handle(new HostPortTCP());
             uint64_t handle_id = (uint64_t) handle.get();
             handleMap[handle_id] = handle;
             *(getUint64(plhs[0])) = handle_id;
@@ -151,17 +151,17 @@ void mexFunction(int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[]) {
         }
         case Action::HEADER: {
             plhs[0] = mxCreateNumericMatrix(1,1,mxUINT32_CLASS,mxREAL);
-            *(getUint32(plhs[0])) = HostPortSocket::HEADER;
+            *(getUint32(plhs[0])) = HostPortTCP::HEADER;
             return;
         }
         case Action::TERMINATOR: {
             plhs[0] = mxCreateNumericMatrix(1,1,mxUINT32_CLASS,mxREAL);
-            *(getUint32(plhs[0])) = HostPortSocket::TERMINATOR;
+            *(getUint32(plhs[0])) = HostPortTCP::TERMINATOR;
             return;
         }
         case Action::TIMEOUT: {
             plhs[0] = mxCreateNumericMatrix(1,1,mxUINT32_CLASS,mxREAL);
-            *(getUint32(plhs[0])) = HostPortSocket::TIMEOUT;
+            *(getUint32(plhs[0])) = HostPortTCP::TIMEOUT;
             return;
         }
     }
@@ -174,7 +174,7 @@ void mexFunction(int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[]) {
     if (handleMap.count(handle_id) == 0) //check if valid handle
         mexErrMsgTxt("Unrecognized handle");
 
-    HostPortSocket* handle = handleMap[handle_id].get(); //pointer to HostPortSocket object
+    HostPortTCP* handle = handleMap[handle_id].get(); //pointer to HostPortTCP object
     
     switch (action) {
 
@@ -191,9 +191,9 @@ void mexFunction(int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[]) {
             std::string ipaddr(ipCstr);
             mxFree(ipCstr);
             unsigned int port = static_cast<unsigned int>(mxGetScalar(prhs[3]));
-            unsigned int header = HostPortSocket::HEADER;
-            unsigned int terminator = HostPortSocket::TERMINATOR;
-            unsigned int timeout = HostPortSocket::TIMEOUT;
+            unsigned int header = HostPortTCP::HEADER;
+            unsigned int terminator = HostPortTCP::TERMINATOR;
+            unsigned int timeout = HostPortTCP::TIMEOUT;
             if (nrhs > 4) header = static_cast<unsigned int>(mxGetScalar(prhs[4]));
             if (nrhs > 5) terminator = static_cast<unsigned int>(mxGetScalar(prhs[5]));
             if (nrhs > 6) timeout = static_cast<unsigned int>(mxGetScalar(prhs[6]));
@@ -254,7 +254,7 @@ void mexFunction(int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[]) {
         }
 
         case Action::SetHeader: {
-            unsigned int header = HostPortSocket::HEADER;
+            unsigned int header = HostPortTCP::HEADER;
             if (nrhs > 2) header = static_cast<unsigned int>(mxGetScalar(prhs[2]));
             plhs[0] = mxCreateLogicalMatrix(1,1); 
             *(mxGetLogicals(plhs[0])) = handle->setHeader(header);
@@ -262,7 +262,7 @@ void mexFunction(int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[]) {
         }
 
         case Action::SetTerminator: {
-            unsigned int terminator = HostPortSocket::TERMINATOR;
+            unsigned int terminator = HostPortTCP::TERMINATOR;
             if (nrhs > 2) terminator = static_cast<unsigned int>(mxGetScalar(prhs[2]));
             plhs[0] = mxCreateLogicalMatrix(1,1); 
             *(mxGetLogicals(plhs[0])) = handle->setTerminator(terminator);
@@ -270,7 +270,7 @@ void mexFunction(int nlhs, mxArray *plhs[],int nrhs, const mxArray *prhs[]) {
         }
 
         case Action::SetTimeout: {
-            unsigned int timeout = HostPortSocket::TIMEOUT;
+            unsigned int timeout = HostPortTCP::TIMEOUT;
             if (nrhs > 2) timeout = static_cast<unsigned int>(mxGetScalar(prhs[2]));
             plhs[0] = mxCreateLogicalMatrix(1,1); 
             *(mxGetLogicals(plhs[0])) = handle->setTimeout(timeout);
