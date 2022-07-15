@@ -4,7 +4,9 @@
             "name": "SBBMicro",
             "includePath": [
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/src"
+                "${workspaceFolder}/src",
+                "${MATLAB}/extern/include/*",
+                "/usr/local/MATLAB/R2022a/extern/include"
             ]
         }
     ],
